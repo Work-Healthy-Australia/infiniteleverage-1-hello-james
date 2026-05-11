@@ -2,8 +2,11 @@
   "name": "infiniteleverage-1-hello-james",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=22 <26"
+  },
   "scripts": {
-    "dev": "next dev",
+    "dev": "NODE_OPTIONS='--localstorage-file=/tmp/ls-hello-james.json' next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
