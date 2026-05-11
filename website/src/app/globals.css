@@ -1,28 +1,411 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-@import "shadcn/tailwind.css";
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-sans: var(--font-inter-tight), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+  --font-sans: var(--font-lc-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-lc-mono), ui-monospace, monospace;
 }
+
+/* ─────────────────────────────────────────────────────────────────────────
+   Design System — ported from longevity-coach-wha
+   CSS custom properties: --lc-* tokens, same system, teal accent variant
+   ───────────────────────────────────────────────────────────────────────── */
 
 :root {
-  --ink: #0B1426;
-  --ink-soft: #1F2A3D;
-  --gray-1: #94A3B8;
-  --gray-2: #64748B;
-  --gray-3: #CBD5E1;
-  --rule: #E2E8F0;
-  --blue: #2563EB;
-  --blue-soft: #DBEAFE;
-  --cream: #F2EDE3;
-  --paper: #FFFFFF;
+  /* Primary (slate blue) */
+  --lc-primary:        #2F6F8F;
+  --lc-primary-700:    #245672;
+  --lc-primary-800:    #1B4258;
+  --lc-primary-100:    #DDE8EE;
+  --lc-primary-50:     #EEF3F6;
+
+  /* Accent — overridden by [data-accent] */
+  --lc-accent:         #F28C38;
+  --lc-accent-600:     #D87422;
+  --lc-accent-50:      #FDF1E4;
+  --lc-accent-100:     #FBE3CC;
+
+  /* Supporting palette */
+  --lc-plum:           #6B5B8E;
+  --lc-plum-700:       #534476;
+  --lc-plum-100:       #E3DEEC;
+  --lc-teal:           #4A9A95;
+  --lc-teal-100:       #D6E9E7;
+
+  /* Neutrals */
+  --lc-ink:            #2B2B2B;
+  --lc-ink-soft:       #4B4B4B;
+  --lc-grey:           #8A9AA5;
+  --lc-grey-soft:      #B9C3CB;
+  --lc-line:           #E3E8EC;
+  --lc-line-soft:      #EDF1F4;
+  --lc-bg:             #F4F7F9;
+  --lc-surface:        #FFFFFF;
+  --lc-surface-warm:   #FAF7F3;
+
+  /* Semantic */
+  --lc-success:        #3F8A5C;
+  --lc-danger:         #B5452F;
+
+  /* Typography */
+  --lc-serif: var(--font-lc-serif), "Iowan Old Style", Georgia, serif;
+  --lc-sans:  var(--font-lc-sans), ui-sans-serif, system-ui, sans-serif;
+  --lc-mono:  var(--font-lc-mono), ui-monospace, Menlo, monospace;
+
+  /* Dynamic accent (default: orange) */
+  --accent:     var(--lc-accent);
+  --accent-50:  var(--lc-accent-50);
+  --accent-100: var(--lc-accent-100);
+  --accent-600: var(--lc-accent-600);
 }
 
+/* Teal accent — used by hello-james (data-accent="teal" on <html>) */
+[data-accent="teal"] {
+  --accent:     #4A9A95;
+  --accent-50:  #E8F2F1;
+  --accent-100: #D6E9E7;
+  --accent-600: #367772;
+}
+
+[data-accent="plum"] {
+  --accent:     #6B5B8E;
+  --accent-50:  #F0ECF5;
+  --accent-100: #E3DEEC;
+  --accent-600: #534476;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   Base
+   ───────────────────────────────────────────────────────────────────────── */
+
+html, body { margin: 0; padding: 0; }
 body {
-  color: var(--ink);
-  background: var(--paper);
+  font-family: var(--lc-sans);
+  color: var(--lc-ink);
+  background: var(--lc-bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   Page scope — .hj-page wraps the whole landing page
+   ───────────────────────────────────────────────────────────────────────── */
+
+.hj-page, .hj-page *, .hj-page *::before, .hj-page *::after { box-sizing: border-box; }
+.hj-page {
+  font-family: var(--lc-sans);
+  color: var(--lc-ink);
+  background: var(--lc-bg);
+  font-size: 15px;
+  line-height: 1.55;
+}
+.hj-page img { max-width: 100%; display: block; }
+
+/* Layout */
+.hj-page .wrap {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+@media (max-width: 768px) {
+  .hj-page .wrap { padding: 0 24px; }
+}
+
+/* Eyebrow labels */
+.hj-page .eyebrow {
+  font-family: var(--lc-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-600);
+  display: inline-block;
+  margin-bottom: 14px;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   Buttons — matches longevity-coach-wha exactly
+   ───────────────────────────────────────────────────────────────────────── */
+
+.hj-page .btn {
+  font-family: var(--lc-sans);
+  font-weight: 500;
+  font-size: 14px;
+  padding: 11px 20px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.15s ease;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.hj-page .btn-primary {
+  background: var(--lc-primary);
+  color: #fff;
+}
+.hj-page .btn-primary:hover { background: var(--lc-primary-700); }
+
+.hj-page .btn-accent {
+  background: var(--accent);
+  color: #fff;
+}
+.hj-page .btn-accent:hover { background: var(--accent-600); }
+
+.hj-page .btn-ghost {
+  background: transparent;
+  color: var(--lc-ink);
+}
+.hj-page .btn-ghost:hover { background: var(--lc-line-soft); }
+
+.hj-page .btn-secondary {
+  background: var(--lc-surface);
+  color: var(--lc-primary);
+  border-color: var(--lc-primary-100);
+}
+.hj-page .btn-secondary:hover {
+  background: var(--lc-primary-50);
+  border-color: var(--lc-primary);
+}
+
+.hj-page .btn-lg { padding: 15px 28px; font-size: 15px; }
+
+/* ─────────────────────────────────────────────────────────────────────────
+   Nav
+   ───────────────────────────────────────────────────────────────────────── */
+
+.hj-page .nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(244, 247, 249, 0.85);
+  backdrop-filter: saturate(1.2) blur(12px);
+  -webkit-backdrop-filter: saturate(1.2) blur(12px);
+  border-bottom: 1px solid var(--lc-line);
+}
+.hj-page .nav-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 18px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.hj-page .nav-brand {
+  font-family: var(--lc-sans);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--lc-ink);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+@media (max-width: 768px) {
+  .hj-page .nav-inner { padding: 16px 24px; }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   Hero section
+   ───────────────────────────────────────────────────────────────────────── */
+
+.hj-page .hero {
+  padding: 96px 0 104px;
+  background: linear-gradient(180deg, #ffffff 0%, var(--lc-bg) 100%);
+  border-bottom: 1px solid var(--lc-line);
+  text-align: center;
+}
+.hj-page .hero h1 {
+  font-family: var(--lc-serif);
+  font-weight: 300;
+  font-size: clamp(48px, 7vw, 88px);
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+  color: var(--lc-ink);
+  margin: 0 0 24px;
+}
+.hj-page .hero h1 em {
+  font-style: italic;
+  color: var(--accent-600);
+}
+.hj-page .hero .tagline {
+  font-size: 20px;
+  line-height: 1.5;
+  color: var(--lc-ink-soft);
+  max-width: 600px;
+  margin: 0 auto 40px;
+  text-wrap: pretty;
+}
+.hj-page .hero .ctas {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+.hj-page .hero .trust {
+  font-family: var(--lc-mono);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--lc-grey);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   What You Get — 3-column grid
+   ───────────────────────────────────────────────────────────────────────── */
+
+.hj-page .wyg {
+  padding: 96px 0;
+  border-bottom: 1px solid var(--lc-line);
+  background: var(--lc-surface);
+}
+.hj-page .wyg .section-head {
+  text-align: center;
+  margin-bottom: 56px;
+}
+.hj-page .wyg .section-head h2 {
+  font-family: var(--lc-serif);
+  font-weight: 300;
+  font-size: clamp(32px, 4vw, 48px);
+  letter-spacing: -0.02em;
+  color: var(--lc-ink);
+  margin: 0;
+}
+.hj-page .wyg .grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+@media (max-width: 768px) {
+  .hj-page .wyg .grid { grid-template-columns: 1fr; }
+}
+.hj-page .wyg .card {
+  background: var(--lc-bg);
+  border: 1px solid var(--lc-line);
+  border-radius: 16px;
+  padding: 32px;
+}
+.hj-page .wyg .card .icon { font-size: 36px; margin-bottom: 16px; }
+.hj-page .wyg .card h3 {
+  font-family: var(--lc-sans);
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--lc-ink);
+  margin: 0 0 12px;
+  line-height: 1.3;
+}
+.hj-page .wyg .card p {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--lc-ink-soft);
+  margin: 0;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   How It Works — protocol tracks
+   ───────────────────────────────────────────────────────────────────────── */
+
+.hj-page .hiw {
+  padding: 96px 0;
+  border-bottom: 1px solid var(--lc-line);
+  background: var(--lc-bg);
+}
+.hj-page .hiw .section-head {
+  text-align: center;
+  margin-bottom: 56px;
+}
+.hj-page .hiw .section-head h2 {
+  font-family: var(--lc-serif);
+  font-weight: 300;
+  font-size: clamp(32px, 4vw, 48px);
+  letter-spacing: -0.02em;
+  color: var(--lc-ink);
+  margin: 0 0 12px;
+}
+.hj-page .hiw .section-head p {
+  font-size: 16px;
+  color: var(--lc-grey);
+  margin: 0;
+}
+.hj-page .hiw .tracks {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+@media (max-width: 768px) {
+  .hj-page .hiw .tracks { grid-template-columns: 1fr; }
+}
+.hj-page .hiw .track {
+  background: var(--lc-surface);
+  border: 1px solid var(--lc-line);
+  border-radius: 16px;
+  padding: 28px 32px;
+}
+.hj-page .hiw .track.full { grid-column: 1 / -1; }
+.hj-page .hiw .track-num {
+  font-family: var(--lc-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-600);
+  margin-bottom: 4px;
+}
+.hj-page .hiw .track h3 {
+  font-family: var(--lc-sans);
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--lc-ink);
+  margin: 0 0 16px;
+}
+.hj-page .hiw .track ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.hj-page .hiw .track li {
+  display: flex;
+  gap: 12px;
+  font-size: 14px;
+  line-height: 1.55;
+}
+.hj-page .hiw .track li .pid {
+  font-family: var(--lc-mono);
+  font-weight: 600;
+  font-size: 12px;
+  color: var(--accent-600);
+  flex-shrink: 0;
+  padding-top: 1px;
+  min-width: 24px;
+}
+.hj-page .hiw .track li .ptext { color: var(--lc-ink-soft); }
+
+/* ─────────────────────────────────────────────────────────────────────────
+   Final CTA
+   ───────────────────────────────────────────────────────────────────────── */
+
+.hj-page .final-cta {
+  padding: 96px 0;
+  text-align: center;
+  background: var(--lc-ink);
+}
+.hj-page .final-cta h2 {
+  font-family: var(--lc-serif);
+  font-weight: 300;
+  font-size: clamp(28px, 4vw, 44px);
+  color: #fff;
+  letter-spacing: -0.02em;
+  margin: 0 0 20px;
+}
+.hj-page .final-cta .trust-line {
+  font-size: 14px;
+  color: var(--lc-grey);
+  margin-top: 20px;
+  font-family: var(--lc-mono);
+  letter-spacing: 0.03em;
 }
