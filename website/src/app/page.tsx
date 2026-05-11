@@ -6,6 +6,7 @@ const tracks = [
   {
     number: '01',
     name: 'Mindset',
+    full: true,
     protocols: [
       { id: 'P1', text: 'Humans are the orchestrator. The real intelligence is still you.' },
       { id: 'P2', text: 'The CMS is dead. AI is the CMS.' },
@@ -16,6 +17,7 @@ const tracks = [
   {
     number: '02',
     name: 'Infrastructure',
+    full: false,
     protocols: [
       { id: 'P5', text: 'GitHub — version control for all code and context.' },
       { id: 'P6', text: 'Vercel — deploys only via git push. Never vercel deploy directly.' },
@@ -25,6 +27,7 @@ const tracks = [
   {
     number: '03',
     name: 'Building',
+    full: false,
     protocols: [
       { id: 'P8', text: 'Design system written before any component ever gets built.' },
       { id: 'P9', text: 'Concrete step-by-step workflows that turn intent into output.' },
@@ -35,6 +38,7 @@ const tracks = [
   {
     number: '04',
     name: 'Team and Ops',
+    full: false,
     protocols: [
       { id: 'P12', text: 'DevOps escalates to a human engineer when needed — never guesses on infrastructure.' },
       { id: 'P13', text: '8 fixed agent roles. No improvising new ones.' },
@@ -45,6 +49,7 @@ const tracks = [
   {
     number: '05',
     name: 'Continuity',
+    full: false,
     protocols: [
       { id: 'P16', text: 'QA knows exactly what AI can and cannot test — and flags the rest to a human.' },
       { id: 'P17', text: 'Context handed off via BRIDGE.md and the memory system — no knowledge tax between sessions.' },
@@ -57,85 +62,64 @@ const tracks = [
 
 export default function Page() {
   return (
-    <main>
+    <main className="hj-page">
+
       {/* ── SECTION 1: HERO ─────────────────────────────────────────────── */}
-      <section
-        className="min-h-screen flex flex-col items-center justify-center px-6 py-24 text-white text-center"
-        style={{ background: 'var(--ink)' }}
-      >
-        <h1 className="text-5xl font-bold tracking-tight mb-6">
-          Hello, James.
-        </h1>
-        <p className="max-w-2xl text-lg leading-relaxed mb-10" style={{ color: 'var(--gray-3)' }}>
-          A full marketing and development team powered by AI agents — orchestrated by a human
-          who guarantees the outcome.
-        </p>
-        <a
-          href="https://cal.com"
-          className="inline-block px-8 py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity mb-6 text-white"
-          style={{ background: 'var(--blue)' }}
-        >
-          Book a Strategy Call
-        </a>
-        <a
-          href="#protocols"
-          className="text-sm underline underline-offset-4 transition-opacity hover:opacity-70"
-          style={{ color: 'var(--gray-1)' }}
-        >
-          See how it works ↓
-        </a>
+      <section className="hero">
+        <div className="wrap">
+          <span className="eyebrow">Infinite Leverage</span>
+          <h1>
+            Hello, <em>James.</em>
+          </h1>
+          <p className="tagline">
+            A full marketing and development team powered by AI agents — orchestrated by a human
+            who guarantees the outcome.
+          </p>
+          <div className="ctas">
+            <a href="https://cal.com" className="btn btn-accent btn-lg">
+              Book a Strategy Call
+            </a>
+            <a href="#how-it-works" className="btn btn-ghost">
+              See how it works ↓
+            </a>
+          </div>
+          <p className="trust">No retainer lock-in · Every deliverable reviewed by a human</p>
+        </div>
       </section>
 
       {/* ── SECTION 2: WHAT YOU GET ─────────────────────────────────────── */}
-      <section className="py-24 px-6" style={{ background: 'var(--cream)' }}>
-        <div className="max-w-5xl mx-auto">
-          <h2
-            className="text-3xl font-bold tracking-tight text-center mb-12"
-            style={{ color: 'var(--ink)' }}
-          >
-            What You Get
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <section className="wyg">
+        <div className="wrap">
+          <div className="section-head">
+            <span className="eyebrow">What You Get</span>
+            <h2>Everything a marketing team does — without the team.</h2>
+          </div>
+          <div className="grid">
             {/* Card 1 */}
-            <div
-              className="rounded-2xl p-8"
-              style={{ background: 'var(--paper)', border: '1px solid var(--rule)' }}
-            >
-              <div className="text-4xl mb-4">🧠</div>
-              <h3 className="text-lg font-bold mb-3" style={{ color: 'var(--ink)' }}>
-                A full marketing team that runs itself
-              </h3>
-              <p className="text-sm leading-relaxed" style={{ color: 'var(--gray-2)' }}>
+            <div className="card">
+              <div className="icon">🧠</div>
+              <h3>A full marketing team that runs itself</h3>
+              <p>
                 Strategy, copy, design, and publishing handled by AI agents orchestrated by James.
                 You get consistent, high-quality output every week — without hiring a team.
               </p>
             </div>
 
             {/* Card 2 */}
-            <div
-              className="rounded-2xl p-8"
-              style={{ background: 'var(--paper)', border: '1px solid var(--rule)' }}
-            >
-              <div className="text-4xl mb-4">🛠</div>
-              <h3 className="text-lg font-bold mb-3" style={{ color: 'var(--ink)' }}>
-                A dev team on demand
-              </h3>
-              <p className="text-sm leading-relaxed" style={{ color: 'var(--gray-2)' }}>
+            <div className="card">
+              <div className="icon">🛠</div>
+              <h3>A dev team on demand</h3>
+              <p>
                 Need a landing page, booking flow, or integration? The AI development team scopes,
                 builds, and ships it. No contractors, no delays, no handoff friction.
               </p>
             </div>
 
             {/* Card 3 */}
-            <div
-              className="rounded-2xl p-8"
-              style={{ background: 'var(--paper)', border: '1px solid var(--rule)' }}
-            >
-              <div className="text-4xl mb-4">📈</div>
-              <h3 className="text-lg font-bold mb-3" style={{ color: 'var(--ink)' }}>
-                Measurable momentum
-              </h3>
-              <p className="text-sm leading-relaxed" style={{ color: 'var(--gray-2)' }}>
+            <div className="card">
+              <div className="icon">📈</div>
+              <h3>Measurable momentum</h3>
+              <p>
                 Weekly content, monthly campaigns, and quarterly strategy reviews. You always know
                 what shipped, what&apos;s next, and what needs your input.
               </p>
@@ -144,44 +128,27 @@ export default function Page() {
         </div>
       </section>
 
-      {/* ── SECTION 3: THE 18 PROTOCOLS ─────────────────────────────────── */}
-      <section id="protocols" className="py-24 px-6" style={{ background: 'var(--paper)' }}>
-        <div className="max-w-5xl mx-auto">
-          <h2
-            className="text-3xl font-bold tracking-tight text-center mb-3"
-            style={{ color: 'var(--ink)' }}
-          >
-            The 18 Protocols
-          </h2>
-          <p className="text-center mb-12" style={{ color: 'var(--gray-2)' }}>
-            The operating system behind every Infinite Leverage team.
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {tracks.map((track, index) => (
+      {/* ── SECTION 3: HOW IT WORKS ──────────────────────────────────────── */}
+      <section id="how-it-works" className="hiw">
+        <div className="wrap">
+          <div className="section-head">
+            <span className="eyebrow">How It Works</span>
+            <h2>How It Works</h2>
+            <p>The 18 protocols behind every Infinite Leverage team.</p>
+          </div>
+          <div className="tracks">
+            {tracks.map((track) => (
               <div
                 key={track.number}
-                className={`rounded-2xl p-8${index === 0 ? ' md:col-span-2' : ''}`}
-                style={{
-                  background: 'var(--blue-soft)',
-                  border: '1px solid var(--rule)',
-                }}
+                className={`track${track.full ? ' full' : ''}`}
               >
-                <p
-                  className="text-xs font-mono font-semibold uppercase tracking-widest mb-1"
-                  style={{ color: 'var(--blue)' }}
-                >
-                  Track {track.number}
-                </p>
-                <h3 className="text-lg font-bold mb-4" style={{ color: 'var(--ink)' }}>
-                  {track.name}
-                </h3>
-                <ol className="space-y-2">
+                <p className="track-num">Track {track.number}</p>
+                <h3>{track.name}</h3>
+                <ol>
                   {track.protocols.map((p) => (
-                    <li key={p.id} className="flex gap-3 text-sm">
-                      <span className="font-mono font-bold shrink-0" style={{ color: 'var(--blue)' }}>
-                        {p.id}
-                      </span>
-                      <span style={{ color: 'var(--ink-soft)' }}>{p.text}</span>
+                    <li key={p.id}>
+                      <span className="pid">{p.id}</span>
+                      <span className="ptext">{p.text}</span>
                     </li>
                   ))}
                 </ol>
@@ -192,37 +159,49 @@ export default function Page() {
       </section>
 
       {/* ── SECTION 4: CONTACT FORM ──────────────────────────────────────── */}
-      <section className="py-24 px-6" style={{ background: 'var(--cream)' }}>
-        <div className="max-w-xl mx-auto">
-          <h2
-            className="text-3xl font-bold tracking-tight text-center mb-3"
-            style={{ color: 'var(--ink)' }}
-          >
-            Get in Touch
-          </h2>
-          <p className="text-center mb-10" style={{ color: 'var(--gray-2)' }}>
-            Ready to build your AI team? Let&apos;s talk.
-          </p>
+      <section
+        style={{
+          padding: '96px 0',
+          background: 'var(--lc-surface)',
+          borderBottom: '1px solid var(--lc-line)',
+        }}
+      >
+        <div className="wrap" style={{ maxWidth: '560px' }}>
+          <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+            <span className="eyebrow">Get in Touch</span>
+            <h2
+              style={{
+                fontFamily: 'var(--lc-serif)',
+                fontWeight: 300,
+                fontSize: 'clamp(28px, 4vw, 40px)',
+                letterSpacing: '-0.02em',
+                color: 'var(--lc-ink)',
+                margin: '0 0 12px',
+              }}
+            >
+              Ready to build your AI team?
+            </h2>
+            <p style={{ fontSize: '16px', color: 'var(--lc-grey)', margin: 0 }}>
+              Let&apos;s talk.
+            </p>
+          </div>
           <ContactForm />
         </div>
       </section>
 
       {/* ── SECTION 5: FINAL CTA ─────────────────────────────────────────── */}
-      <section
-        className="py-24 px-6 text-center text-white"
-        style={{ background: 'var(--ink)' }}
-      >
-        <a
-          href="https://cal.com"
-          className="inline-block px-8 py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity mb-6 text-white"
-          style={{ background: 'var(--blue)' }}
-        >
-          Book a Strategy Call
-        </a>
-        <p className="text-sm" style={{ color: 'var(--gray-1)' }}>
-          Every deliverable reviewed by a human before it reaches you.
-        </p>
+      <section className="final-cta">
+        <div className="wrap">
+          <h2>Ready to move at the speed of AI?</h2>
+          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
+            <a href="https://cal.com" className="btn btn-accent btn-lg">
+              Book a Strategy Call
+            </a>
+          </div>
+          <p className="trust-line">Every deliverable reviewed by a human before it reaches you.</p>
+        </div>
       </section>
+
     </main>
   )
 }
