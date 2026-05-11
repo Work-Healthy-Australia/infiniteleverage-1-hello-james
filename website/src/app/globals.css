@@ -1,0 +1,28 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: var(--font-inter-tight), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+}
+
+:root {
+  --ink: #0B1426;
+  --ink-soft: #1F2A3D;
+  --gray-1: #94A3B8;
+  --gray-2: #64748B;
+  --gray-3: #CBD5E1;
+  --rule: #E2E8F0;
+  --blue: #2563EB;
+  --blue-soft: #DBEAFE;
+  --cream: #F2EDE3;
+  --paper: #FFFFFF;
+}
+
+body {
+  color: var(--ink);
+  background: var(--paper);
+}
