@@ -181,7 +181,7 @@ export default function Page() {
             >
               Ready to build your AI team?
             </h2>
-            <p style={{ fontSize: '20px', color: 'var(--lc-ink-soft)', margin: 0 }}>
+            <p style={{ fontSize: '24px', color: 'var(--lc-ink-soft)', margin: 0 }}>
               Let&apos;s talk.
             </p>
           </div>
