@@ -173,15 +173,15 @@ export default function Page() {
               style={{
                 fontFamily: 'var(--lc-serif)',
                 fontWeight: 300,
-                fontSize: 'clamp(28px, 4vw, 40px)',
+                fontSize: 'clamp(32px, 4vw, 48px)',
                 letterSpacing: '-0.02em',
                 color: 'var(--lc-ink)',
-                margin: '0 0 12px',
+                margin: '0 0 16px',
               }}
             >
               Ready to build your AI team?
             </h2>
-            <p style={{ fontSize: '16px', color: 'var(--lc-grey)', margin: 0 }}>
+            <p style={{ fontSize: '20px', color: 'var(--lc-ink-soft)', margin: 0 }}>
               Let&apos;s talk.
             </p>
           </div>
